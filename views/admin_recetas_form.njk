@@ -1,0 +1,71 @@
+{% extends "admin_base.njk" %}
+
+{% block titulo %}Receta | Nueva{% endblock %}
+
+{% block contenido %}
+    <form action="/admin/" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="titulo">Titulo:</label>
+            <input type="text" class="form-control" name="titulo"
+                    placeholder="Titulo de la receta"/>
+        </div>
+        <div class="form-group">
+            <label for="comensales">Comensales:</label>
+            <input type="text" class="form-control" name="comensales"
+                    placeholder="Nº de comensales"/>
+        </div>
+        <div class="form-group">
+            <label for="preparacion">Tiempo de preparacion:</label>
+            <input type="number" class="form-control" name="preparacion"
+                    placeholder="Tiempo de preparacion"/>
+        </div>
+        <div class="form-group">
+            <label for="coccion">Tiempo de coccion:</label>
+            <input type="number" class="form-control" name="coccion"
+                    placeholder="Tiempo de coccion"/>
+        </div>
+        <div class="form-group">
+            <label for="descripcion">Descripcion de la receta:</label>
+            <input type="text" class="form-control" name="descripcion"
+                    placeholder="Minutos de preparacion"/>
+        </div>
+        <div class="form-group">
+            <label for="imagen">Foto de la receta:</label>
+            <input type="file" class="form-control" name="imagen"
+                    placeholder="Foto de la receta"/>
+        </div>
+        <div class="form-group">
+            <label for="ingrediente">Ingrediente:</label>
+            <input type="text" class="form-control" name="elementos[ingrediente]"
+                    placeholder="Nombre del ingrediente"/>
+        </div>
+        <div class="form-group">
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" class="form-control" name="elementos[cantidad]"
+                    placeholder="Cantidad"/>
+        </div>
+        <div class="form-group">
+            <label for="unidad">Descripcion de la receta:</label>
+            <input type="text" class="form-control" name="elementos[unidad]"
+                    placeholder="Unidad de medida"/>
+        </div>
+        <div class="form-group">
+            <label for="ingrediente">Ingrediente:</label>
+            <input type="text" class="form-control" name="elementos[ingrediente]"
+                    placeholder="Nombre del ingrediente"/>
+        </div>
+        <div class="form-group">
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" class="form-control" name="elementos[cantidad]"
+                    placeholder="Cantidad"/>
+        </div>
+        <div class="form-group">
+            <label for="unidad">Descripcion de la receta:</label>
+            <input type="text" class="form-control" name="elementos[unidad]"
+                    placeholder="Unidad de medida"/>
+        </div>
+        <button type="submit" class="btn btn-primary">
+                    Subir nueva receta
+            </button>
+    </form>
+{% endblock %}

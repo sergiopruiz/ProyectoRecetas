@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+        <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>
+            {% block titulo %}{% endblock %}
+        </title>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <ul class="navbar-nav mr-auto">
+                <li>
+                    <a class="nav-link" href="/">Inicio</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="/auth/login">Administración</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="/admin/nueva">Nueva receta</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="container">
+            {% block contenido %}{% endblock %}
+        </div>
+    </body>
+</html>

@@ -25,7 +25,7 @@ router.get('/buscar', (req, res) => {
 
 // Servicio de busqueda de recetas por id
 router.get('/:id', (req, res) => {
-    Receta.findById(req.params['id']).then(resultado => {
+    Receta.findById(req.params.id).then(resultado => {
         if(resultado){
             res.render('publico_receta',{receta: resultado});
         } else {

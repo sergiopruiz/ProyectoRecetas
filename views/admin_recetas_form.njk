@@ -34,38 +34,32 @@
             <input type="file" class="form-control" name="imagen"
                     placeholder="Foto de la receta"/>
         </div>
-        <div class="form-group">
-            <label for="ingrediente">Ingrediente:</label>
-            <input type="text" class="form-control" name="elementos[ingrediente]"
-                    placeholder="Nombre del ingrediente"/>
+        <div id="bloque-alimento">
+            <div class="form-group">
+                <label for="ingrediente">Ingrediente:</label>
+                <input type="text" class="form-control" name="elementos[ingrediente]"
+                        placeholder="Nombre del ingrediente"/>
+            </div>
+            <div class="form-group">
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" class="form-control" name="elementos[cantidad]"
+                        placeholder="Cantidad"/>
+            </div>
+            <div class="form-group">
+                <label for="unidad">Descripcion de la receta:</label>
+                <input type="text" class="form-control" name="elementos[unidad]"
+                        placeholder="Unidad de medida"/>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="cantidad">Cantidad:</label>
-            <input type="number" class="form-control" name="elementos[cantidad]"
-                    placeholder="Cantidad"/>
-        </div>
-        <div class="form-group">
-            <label for="unidad">Descripcion de la receta:</label>
-            <input type="text" class="form-control" name="elementos[unidad]"
-                    placeholder="Unidad de medida"/>
-        </div>
-        <div class="form-group">
-            <label for="ingrediente">Ingrediente:</label>
-            <input type="text" class="form-control" name="elementos[ingrediente]"
-                    placeholder="Nombre del ingrediente"/>
-        </div>
-        <div class="form-group">
-            <label for="cantidad">Cantidad:</label>
-            <input type="number" class="form-control" name="elementos[cantidad]"
-                    placeholder="Cantidad"/>
-        </div>
-        <div class="form-group">
-            <label for="unidad">Descripcion de la receta:</label>
-            <input type="text" class="form-control" name="elementos[unidad]"
-                    placeholder="Unidad de medida"/>
-        </div>
+        <div id="campo-nuevo"></div>
+       
+        </button>
         <button type="submit" class="btn btn-primary">
                     Subir nueva receta
             </button>
     </form>
+     <button class="btn btn-primary" id="nuevoAlimento"><i class="fas fa-plus-circle mr-1">Añadir ingrediente</i>
+    {% block js %}
+            <script src="/utils/add_ingrediente.js"></script>
+    {% endblock %}
 {% endblock %}

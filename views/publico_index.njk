@@ -7,21 +7,31 @@
     <div class="form-group pt-5">
       <input type="text" class="form-control" id="buscar" name="buscar" placeholder="Buscar receta">
     </div>
-    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></i></button>
-  </form>
-  <hr>
-    {% if error %}
-      <div class="alert alert-danger">
-        {{ error }}
-      </div>
-    {% endif %}
-
-  <div>
-      <ul class="list-group">
-      {% for receta in recetas %}
-          <li class="list-group-item">{{ receta.titulo }}</li>
-          <a href="/recetas/{{ receta.id }}"><i class="fa fa-external-link-alt"></i></a>
-      {% endfor %}
-      </ul>
+    <button type="submit" class="btn btn-primary">
+      <i class="fa fa-search"></i>
+    </i>
+  </button>
+</form>
+<hr>
+{% if error %}
+  <div class="alert alert-danger">
+    {{ error }}
   </div>
+{% endif %}
+
+<div class="row">
+  {% for receta in recetas %}
+    <div class="col-4">
+      <div class="card m-2" style="width: 18rem;">
+        <img class="card-img-top" src="receta.imagen" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{ receta.titulo }}</h5>
+          <p class="card-text">{{ receta.descripcion }}</p>
+          <a href="/{{ receta.id }}" class="btn btn-primary">Ver receta</a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+</div>
 {% endblock %}

@@ -1,0 +1,24 @@
+{% extends "publico_base.njk" %}
+
+{% block titulo %}Receta | Publico{% endblock %}
+
+{% block contenido %}
+    <h2>{{ receta.titulo }} </h2>
+    <p> {{ receta.comensales }} <i>comensales</i></p>
+    <p><strong>Preparación: </strong>{{ receta.preparacion }} min <strong>Cocción: </strong>{{ receta.coccion }} min</p>
+    <div class="row">
+        <div class="col-4">
+            <img src="{{ receta.imagen }}">
+        </div>
+        <div class="col-8">
+            <h5>Ingredientes</h5>
+            <ul>
+            {% for elemento in receta.elementos %}
+                <li>{{ elemento.ingrediente }}: {{ elemento.cantidad}} {{elemento.unidad}}</li>
+            {% endfor %}
+            </ul>
+            <h5>Descripción</h5>
+            <p>{{ receta.descripcion }}</p>
+        </div>
+    </div>
+{% endblock %}

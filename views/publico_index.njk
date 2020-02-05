@@ -23,7 +23,7 @@
   {% for receta in recetas %}
     <div class="col-4">
       <div class="card m-2" style="width: 18rem;">
-        <img class="card-img-top" src="receta.imagen" alt="Card image cap">
+        <img class="card-img-top" src="/public/uploads/{{ receta.imagen }}" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">{{ receta.titulo }}</h5>
           <p class="card-text">{{ receta.descripcion }}</p>

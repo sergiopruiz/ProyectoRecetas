@@ -14,8 +14,9 @@ router.post('/login', (req, res) => {
     let login = req.body.usuario;
     let password = SHA256(req.body.password);
     Usuario.find({login: login, password: password.toString()}).then(resultado => {
-        if (resultado.length > 0){
-            res.render('admin_recetas');
+        if (resultado.length > 0) {
+            req.session.usuario = resultado;
+            res.redirect('/admin/');
         }else{
             res.render('auth_login',{error: 'Usuario incorrecto'});
         }

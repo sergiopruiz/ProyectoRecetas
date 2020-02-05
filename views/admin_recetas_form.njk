@@ -46,20 +46,20 @@
                         placeholder="Cantidad"/>
             </div>
             <div class="form-group">
-                <label for="unidad">Descripcion de la receta:</label>
+                <label for="unidad">Unidad de medida:</label>
                 <input type="text" class="form-control" name="elementos[unidad]"
                         placeholder="Unidad de medida"/>
             </div>
+            <hr class="pt-2 bg-info">
         </div>
         <div id="campo-nuevo"></div>
        
-        </button>
-        <button type="submit" class="btn btn-primary">
+        <button type="button" class="btn btn-secondary mt-2 mb-5" id="nuevoAlimento">
+        <i class="far fa-plus-square mr-1"></i>Añadir ingrediente</button>
+
+        <button type="submit" class="btn btn-primary ml-4 mt-2 mb-5">
                     Subir nueva receta
             </button>
     </form>
-     <button class="btn btn-primary" id="nuevoAlimento"><i class="fas fa-plus-circle mr-1">Añadir ingrediente</i>
-    {% block js %}
-            <script src="/utils/add_ingrediente.js"></script>
-    {% endblock %}
+    <script src="/public/add_ingrediente.js"></script>
 {% endblock %}

@@ -31,7 +31,7 @@ nunjucks.configure('views', {
 });
 
 // Carga de servicios middleware
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -53,6 +53,11 @@ app.use(session({
     saveUninitialized: false
 }));
 
+// asociacion de sesiones y recursos
+app.use((req, res, next) => {
+    res.locals.session = req.session;
+    next();
+});
 
 
 // Guardado de fotos de recetas a traves de multer
@@ -71,9 +76,10 @@ module.exports = {
 
 
 // Enrutadores para cada una de las rutas
-app.use('/', publico);
+app.use('/public', express.static(__dirname + '/public'));
 app.use('/admin', recetas);
 app.use('/auth', auth);
+app.use('/', publico);
 
 // Arranque del servidor
 app.listen(8080);

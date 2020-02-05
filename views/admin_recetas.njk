@@ -4,35 +4,35 @@
 
 {% block contenido %}
   <div>
-  <table class="table table-striped table-dark">
-  <thead>
-    <tr>
-      <th scope="col">Titulo</th>
-      <th scope="col">Editar</th>
-      <th scope="col">Borrar</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for receta in recetas %}
-    <tr>
-      <td>{{ receta.titulo }}</td>
-      <td><a href="/admin/recetas/{{ receta.id }}"><i class="fa fa-edit fa-lg"></i></a></td>
-     
-      <td>
-        <form action="/admin/recetas/{{ receta.id }}" method="post">
-          <input type="hidden" name="_method" value="delete" />
-          <button type="submit" class="btn btn-danger"><span class="fa fa-trash-o fa-lg"></button>
-          <a href="/admin/recetas/{{ receta.id }}"><i class="fa fa-edit fa-lg"></i></a>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-      <ul class="list-group">
-      {% for receta in recetas %}
-          <li class="list-group-item">{{ receta.titulo }}</li>
-          <a href="/admin/recetas/{{ receta.id }}"><i class="fa fa-external-link-alt"></i></a>
-      {% endfor %}
-      </ul>
+    <table class="table table-striped table-dark mt-5">
+      <thead>
+        <tr>
+          <th scope="col">Titulo</th>
+          <th scope="col">Editar</th>
+          <th scope="col">Borrar</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for receta in recetas %}
+          <tr>
+            <td>{{ receta.titulo }}</td>
+            <td>{{ receta.id }}</td>
+            <td>
+              <a href="/admin/editar/{{ receta.id }}">
+                <i class="fa fa-edit fa-lg"></i>
+              </a>
+            </td>
+
+            <td>
+              <form action="/admin/{{ receta.id }}" method="post">
+                <input type="hidden" name="_method" value="delete"/>
+                <button type="submit" class="btn btn-danger">
+                  <span class="fa fa-trash-o fa-lg"></button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 {% endblock %}

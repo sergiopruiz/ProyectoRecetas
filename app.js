@@ -46,6 +46,9 @@ app.use(methodOverride((req, res) => {
     }
 }));
 
+// override with POST having ?_method=PUT
+app.use(methodOverride('_method'));
+
 // Iniciar sesiones
 app.use(session({
     secret: '1234',
@@ -61,17 +64,17 @@ app.use((req, res, next) => {
 
 
 // Guardado de fotos de recetas a traves de multer
-let storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'public/uploads')
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + "_" + file.originalname)
-    }
-});
-module.exports = {
-    storage: storage
-};
+// let storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         cb(null, 'public/uploads')
+//     },
+//     filename: function (req, file, cb) {
+//         cb(null, Date.now() + "_" + file.originalname)
+//     }
+// });
+// module.exports = {
+//     storage: storage
+// };
 
 
 

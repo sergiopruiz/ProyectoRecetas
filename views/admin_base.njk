@@ -11,19 +11,7 @@
         <script src="https://kit.fontawesome.com/ecd7eac62b.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <ul class="navbar-nav mr-auto">
-                <li>
-                    <a class="nav-link" href="/">Inicio</a>
-                </li>
-                <li>
-                    <a class="nav-link" href="/auth/login">Administración</a>
-                </li>
-                <li>
-                    <a class="nav-link" href="/admin/nueva">Nueva receta</a>
-                </li>
-            </ul>
-        </nav>
+        {% include 'admin_menu.njk' %}
         <div class="container">
             {% block contenido %}{% endblock %}
         </div>

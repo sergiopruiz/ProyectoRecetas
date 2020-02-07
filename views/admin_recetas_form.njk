@@ -3,63 +3,92 @@
 {% block titulo %}Receta | Nueva{% endblock %}
 
 {% block contenido %}
-    <form action="/admin/" method="post" enctype="multipart/form-data">
+
+    {% if receta %}
+        <form action="/admin/recetas/{{receta.id}}?_method=PUT" method="post" enctype="multipart/form-data">
+    {% else %}
+        <form action="/admin/recetas" method="post" enctype="multipart/form-data">
+    {% endif %}
+
+        
         <div class="form-group">
             <label for="titulo">Titulo:</label>
-            <input type="text" class="form-control" name="titulo"
+            <input type="text" class="form-control" name="titulo" value="{{receta.titulo}}"
                     placeholder="Titulo de la receta"/>
         </div>
         <div class="form-group">
             <label for="comensales">Comensales:</label>
-            <input type="text" class="form-control" name="comensales"
+            <input type="text" class="form-control" name="comensales" value="{{receta.comensales}}"
                     placeholder="Nº de comensales"/>
         </div>
         <div class="form-group">
             <label for="preparacion">Tiempo de preparacion:</label>
-            <input type="number" class="form-control" name="preparacion"
+            <input type="number" class="form-control" name="preparacion" value="{{receta.preparacion}}"
                     placeholder="Tiempo de preparacion"/>
         </div>
         <div class="form-group">
             <label for="coccion">Tiempo de coccion:</label>
-            <input type="number" class="form-control" name="coccion"
+            <input type="number" class="form-control" name="coccion" value="{{receta.coccion}}"
                     placeholder="Tiempo de coccion"/>
         </div>
         <div class="form-group">
             <label for="descripcion">Descripcion de la receta:</label>
-            <input type="text" class="form-control" name="descripcion"
-                    placeholder="Minutos de preparacion"/>
+            <input type="text" class="form-control" name="descripcion" value="{{receta.descripcion}}"
+                    placeholder="Descripcion de la receta"/>
         </div>
         <div class="form-group">
             <label for="imagen">Foto de la receta:</label>
-            <input type="file" class="form-control" name="imagen"
+            <input type="file" class="form-control" name="imagen" 
                     placeholder="Foto de la receta"/>
         </div>
+
+        {% if receta %}
+            <img src="/public/uploads/{{receta.imagen}}" id="imgPut">
+        {% endif %}
+        
         <div id="bloque-alimento">
+        {%for elemento in receta.elementos %}
             <div class="form-group">
                 <label for="ingrediente">Ingrediente:</label>
-                <input type="text" class="form-control" name="elementos[ingrediente]"
+                <input type="text" class="form-control" name="elementos[ingrediente]" value="{{ elemento.ingrediente }}"
                         placeholder="Nombre del ingrediente"/>
             </div>
             <div class="form-group">
                 <label for="cantidad">Cantidad:</label>
-                <input type="number" class="form-control" name="elementos[cantidad]"
+                <input type="number" class="form-control" name="elementos[cantidad]" value="{{ elemento.cantidad }}"
                         placeholder="Cantidad"/>
             </div>
             <div class="form-group">
                 <label for="unidad">Unidad de medida:</label>
-                <input type="text" class="form-control" name="elementos[unidad]"
+                <input type="text" class="form-control" name="elementos[unidad]" value="{{ elemento.unidad }}"
                         placeholder="Unidad de medida"/>
             </div>
             <hr class="pt-2 bg-info">
+        {% else %}
+            <div class="form-group">
+                    <label for="ingrediente">Ingrediente:</label>
+                    <input type="text" class="form-control" name="elementos[ingrediente]" value="{{ elemento.ingrediente }}"
+                            placeholder="Nombre del ingrediente"/>
+                </div>
+                <div class="form-group">
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="number" class="form-control" name="elementos[cantidad]" value="{{ elemento.cantidad }}"
+                            placeholder="Cantidad"/>
+                </div>
+                <div class="form-group">
+                    <label for="unidad">Unidad de medida:</label>
+                    <input type="text" class="form-control" name="elementos[unidad]" value="{{ elemento.unidad }}"
+                            placeholder="Unidad de medida"/>
+                </div>
+                <hr class="pt-2 bg-info">
+        {% endfor %}
         </div>
         <div id="campo-nuevo"></div>
        
         <button type="button" class="btn btn-secondary mt-2 mb-5" id="nuevoAlimento">
         <i class="far fa-plus-square mr-1"></i>Añadir ingrediente</button>
-
-        <button type="submit" class="btn btn-primary ml-4 mt-2 mb-5">
-                    Subir nueva receta
-            </button>
+        
+        <button type="submit" class="btn btn-primary ml-4 mt-2 mb-5">Subir nueva receta</button>
     </form>
     <script src="/public/add_ingrediente.js"></script>
 {% endblock %}

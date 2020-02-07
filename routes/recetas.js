@@ -7,94 +7,141 @@ let upload = require('../app.js');
 let auth = require('../utils/auth');
 
 let storage = multer.diskStorage({
-        destination: function (req, file, cb) {
-            cb(null, 'public/uploads')
-        },
-        filename: function (req, file, cb) {
-            cb(null, Date.now() + "_" + file.originalname)
-        }
-    });
+    destination: function (req, file, cb) {
+        cb(null, 'public/uploads')
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + "_" + file.originalname)
+    }
+});
 let subirImg = multer({
     storage: storage
 });
 // Servicio para renderizar todas las recetas y sus ingredientes
-router.get('/',auth, (req, res) => {
+router.get('/', auth, (req, res) => {
     Receta.find().then(resultado => {
-        res.render('admin_recetas',{recetas: resultado});
+        res.render('admin_recetas', {
+            recetas: resultado
+        });
     }).catch(error => {
         res.render('admin_error');
     });
 });
 // Servicio para renderizar el formulario para insertar una nueva receta
-router.get('/nueva',auth,(req, res) => {
+router.get('/recetas/nueva', auth, (req, res) => {
     res.render('admin_recetas_form');
 });
 
 // Servicio para renderizar la busqueda de una receta por su id y modificarla
-router.get('/editar/:id',auth , (req, res) => {
+router.get('/recetas/editar/:id', auth, (req, res) => {
     Receta.findById(req.params.id).then(resultado => {
-        res.render('admin_recetas_form',{receta: resultado})
+        res.render('admin_recetas_form', {
+            receta: resultado
+        })
     }).catch(error => {
-        res.render('admin_error', {error: 'Receta no encontrada'});
+        res.render('admin_error', {
+            error: 'Receta no encontrada'
+        });
     });
 });
 
 // Servicio para añadir una nueva receta
- router.post('/',auth, subirImg.single('imagen'), async (req, res) => {
-    let arrayElementos=[];
-    for (let i = 0; i < req.body.elementos.cantidad.length; i++) {
-        arrayElementos.push({ 
-            ingrediente: req.body.elementos.ingrediente[i],
-            cantidad: req.body.elementos.cantidad[i],
-            unidad:  req.body.elementos.unidad[i]
+router.post('/recetas', auth, subirImg.single('imagen'), (req, res) => {
+    let arrayElementos = [];
+
+    if (typeof req.body.elementos.ingrediente !== 'string') {
+        for (let i = 0; i < req.body.elementos.cantidad.length; i++) {
+            arrayElementos.push({
+                ingrediente: req.body.elementos.ingrediente[i],
+                cantidad: req.body.elementos.cantidad[i],
+                unidad: req.body.elementos.unidad[i]
+            });
+        }
+    } else {
+        arrayElementos.push({
+            ingrediente: req.body.elementos.ingrediente,
+            cantidad: req.body.elementos.cantidad,
+            unidad: req.body.elementos.unidad
         });
     }
+
     let nuevaReceta = new Receta({
         titulo: req.body.titulo,
         comensales: req.body.comensales,
         preparacion: req.body.preparacion,
         coccion: req.body.coccion,
         descripcion: req.body.descripcion,
-        elementos: arrayElementos,
-        imagen: req.file.filename
+        elementos: arrayElementos
     });
-    await nuevaReceta.save().then(resultado => {
-        res.redirect(req.baseUrl)
+
+    if(typeof req.file !== 'undefined'){
+        nuevaReceta.imagen = req.file.filename;
+    }
+
+    nuevaReceta.save().then(resultado => {
+        res.redirect('/admin');
     }).catch(error => {
         res.render('admin_error');
     });
 });
 
 //Servicio para renderiza la vista para editar una receta existente
-router.put('/:id',auth, subirImg.single('imagen'), (req, res) => {
-    Receta.findOneAndUpdate(req.params.id, {
-        $set: {
-            titulo: req.body.titulo,
-            comensales: req.body.comensales,
-            preparacion: req.body.preparacion,
-            coccion: req.body.coccion,
-            descripcion: req.body.descripcion,
-            imagen: req.file.filename
+router.put('/recetas/:id', auth, subirImg.single('imagen'), (req, res) => {
+    let arrayElementos = [];
+
+    if (typeof req.body.elementos.ingrediente !== 'string') {
+        for (let i = 0; i < req.body.elementos.cantidad.length; i++) {
+            arrayElementos.push({
+                ingrediente: req.body.elementos.ingrediente[i],
+                cantidad: req.body.elementos.cantidad[i],
+                unidad: req.body.elementos.unidad[i]
+            });
         }
+    } else {
+        arrayElementos.push({
+            ingrediente: req.body.elementos.ingrediente,
+            cantidad: req.body.elementos.cantidad,
+            unidad: req.body.elementos.unidad
+        });
+    }
+    let nuevaReceta = {
+        titulo: req.body.titulo,
+        comensales: req.body.comensales,
+        preparacion: req.body.preparacion,
+        coccion: req.body.coccion,
+        descripcion: req.body.descripcion,
+        elementos: arrayElementos
+    };
+
+    if(typeof req.file !== 'undefined'){
+        nuevaReceta.imagen = req.file.filename;
+    }
+
+    Receta.findOneAndUpdate(req.params.id, {
+        $set: nuevaReceta 
     }, {
         new: true
     }).then(resultado => {
         if (resultado)
-            res.render(req.baseUrl);
+            res.redirect(req.baseUrl);
         else
-            res.render('admin_error',{error: 'Receta no encontrada'});
+            res.render('admin_error', {
+                error: 'Receta no encontrada'
+            });
     }).catch(error => {
         res.render('admin_error')
     });
 });
 
 // Servicio para renderizar la vista de eliminar una receta a traves de su id
-router.delete('/:id',auth ,(req, res) => {
+router.delete('/recetas/:id', auth, (req, res) => {
     Receta.findByIdAndDelete(req.params.id).then(resultado => {
         if (resultado)
             res.redirect(req.baseUrl);
         else
-            res.render('admin_error',{error: 'Receta no encontrada'});
+            res.render('admin_error', {
+                error: 'Receta no encontrada'
+            });
     }).catch(error => {
         res.render('admin_error')
     });

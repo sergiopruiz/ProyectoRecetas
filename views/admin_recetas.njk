@@ -16,15 +16,14 @@
         {% for receta in recetas %}
           <tr>
             <td>{{ receta.titulo }}</td>
-            <td>{{ receta.id }}</td>
             <td>
-              <a href="/admin/editar/{{ receta.id }}">
+              <a href="/admin/recetas/editar/{{ receta.id }}">
                 <i class="fa fa-edit fa-lg"></i>
               </a>
             </td>
 
             <td>
-              <form action="/admin/{{ receta.id }}" method="post">
+              <form action="/admin/recetas/{{ receta.id }}" method="post">
                 <input type="hidden" name="_method" value="delete"/>
                 <button type="submit" class="btn btn-danger">
                   <span class="fa fa-trash-o fa-lg"></button>

@@ -8,4 +8,7 @@
             <a class="nav-link" href="/admin">Administración</a>
         </li>
     </ul>
+    {% if session %}
+        <a class="text-white" href="/auth/logout">Cerrar sesión</a>
+    {% endif %}
 </nav>

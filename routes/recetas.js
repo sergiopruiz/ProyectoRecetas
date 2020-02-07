@@ -79,7 +79,7 @@ router.post('/recetas', auth, subirImg.single('imagen'), (req, res) => {
     }
 
     nuevaReceta.save().then(resultado => {
-        res.redirect('/admin');
+        res.redirect(req.baseUrl);
     }).catch(error => {
         res.render('admin_error');
     });

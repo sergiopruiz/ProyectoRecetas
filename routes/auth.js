@@ -28,6 +28,6 @@ router.post('/login', (req, res) => {
 // Servicio para hacer logout y destruir la sesion
 router.get('/logout', (req, res) => {
     req.session.destroy();
-    res.render('publico_index');
+    res.redirect('/');
 });
 module.exports = router;

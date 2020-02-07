@@ -32,9 +32,9 @@
                     placeholder="Tiempo de coccion"/>
         </div>
         <div class="form-group">
-            <label for="descripcion">Descripcion de la receta:</label>
-            <input type="text" class="form-control" name="descripcion" value="{{receta.descripcion}}"
-                    placeholder="Descripcion de la receta"/>
+              <label for="descripcion">Descripcion de la receta:</label>
+              <textarea class="form-control" name="descripcion" rows="3" 
+              placeholder="Descripcion de la receta">{{receta.descripcion}}</textarea>
         </div>
         <div class="form-group">
             <label for="imagen">Foto de la receta:</label>
@@ -43,7 +43,7 @@
         </div>
 
         {% if receta %}
-            <img src="/public/uploads/{{receta.imagen}}" id="imgPut">
+            <img src="/public/uploads/{{receta.imagen}}" class="w-50">
         {% endif %}
         
         <div id="bloque-alimento">
@@ -88,7 +88,14 @@
         <button type="button" class="btn btn-secondary mt-2 mb-5" id="nuevoAlimento">
         <i class="far fa-plus-square mr-1"></i>Añadir ingrediente</button>
         
-        <button type="submit" class="btn btn-primary ml-4 mt-2 mb-5">Subir nueva receta</button>
+        <button type="submit" class="btn btn-primary ml-4 mt-2 mb-5">
+            {% if receta %}
+                Actualizar receta
+            {% else %}
+                Subir nueva receta
+            {% endif %}
+            
+        </button>
     </form>
     <script src="/public/add_ingrediente.js"></script>
 {% endblock %}

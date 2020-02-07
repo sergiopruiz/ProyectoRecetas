@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const nunjucks = require('nunjucks');
 const methodOverride = require('method-override');
 const session = require('express-session');
-const multer = require('multer');
+// const multer = require('multer');
 
 
 // Enrutadores
@@ -37,7 +37,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 
-// Procesador de peticiones PUT y DELETE
+// Procesador de peticiones DELETE
 app.use(methodOverride((req, res) => {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
         let method = req.body._method;
@@ -46,7 +46,7 @@ app.use(methodOverride((req, res) => {
     }
 }));
 
-// override with POST having ?_method=PUT
+// Sobreescribe el metodo Post para realizar el PUT de los formularios (?_method=PUT)
 app.use(methodOverride('_method'));
 
 // Iniciar sesiones
@@ -63,7 +63,7 @@ app.use((req, res, next) => {
 });
 
 
-// Guardado de fotos de recetas a traves de multer
+// Guardado de fotos de recetas a traves de multer exportando el modulo
 // let storage = multer.diskStorage({
 //     destination: function (req, file, cb) {
 //         cb(null, 'public/uploads')

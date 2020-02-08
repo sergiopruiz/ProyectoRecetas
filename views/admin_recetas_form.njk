@@ -14,27 +14,27 @@
         <div class="form-group">
             <label for="titulo">Titulo:</label>
             <input type="text" class="form-control" name="titulo" value="{{receta.titulo}}"
-                    placeholder="Titulo de la receta"/>
+                    placeholder="Titulo de la receta" required/>
         </div>
         <div class="form-group">
             <label for="comensales">Comensales:</label>
             <input type="text" class="form-control" name="comensales" value="{{receta.comensales}}"
-                    placeholder="Nº de comensales"/>
+                    placeholder="Nº de comensales" required/>
         </div>
         <div class="form-group">
-            <label for="preparacion">Tiempo de preparacion:</label>
+            <label for="preparacion">Tiempo de preparación:</label>
             <input type="number" class="form-control" name="preparacion" value="{{receta.preparacion}}"
-                    placeholder="Tiempo de preparacion"/>
+                    placeholder="Tiempo de preparacion" required/>
         </div>
         <div class="form-group">
-            <label for="coccion">Tiempo de coccion:</label>
+            <label for="coccion">Tiempo de cocción:</label>
             <input type="number" class="form-control" name="coccion" value="{{receta.coccion}}"
-                    placeholder="Tiempo de coccion"/>
+                    placeholder="Tiempo de coccion" required/>
         </div>
         <div class="form-group">
-              <label for="descripcion">Descripcion de la receta:</label>
+              <label for="descripcion">Descripción de la receta:</label>
               <textarea class="form-control" name="descripcion" rows="3" 
-              placeholder="Descripcion de la receta">{{receta.descripcion}}</textarea>
+              placeholder="Descripcion de la receta" required>{{receta.descripcion}}</textarea>
         </div>
         <div class="form-group">
             <label for="imagen">Foto de la receta:</label>
@@ -68,17 +68,17 @@
             <div class="form-group">
                     <label for="ingrediente">Ingrediente:</label>
                     <input type="text" class="form-control" name="elementos[ingrediente]" value="{{ elemento.ingrediente }}"
-                            placeholder="Nombre del ingrediente"/>
+                            placeholder="Nombre del ingrediente" required/>
                 </div>
                 <div class="form-group">
                     <label for="cantidad">Cantidad:</label>
                     <input type="number" class="form-control" name="elementos[cantidad]" value="{{ elemento.cantidad }}"
-                            placeholder="Cantidad"/>
+                            placeholder="Cantidad" required/>
                 </div>
                 <div class="form-group">
                     <label for="unidad">Unidad de medida:</label>
                     <input type="text" class="form-control" name="elementos[unidad]" value="{{ elemento.unidad }}"
-                            placeholder="Unidad de medida"/>
+                            placeholder="Unidad de medida" required/>
                 </div>
                 <hr class="pt-2 bg-info">
         {% endfor %}

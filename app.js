@@ -1,4 +1,8 @@
 // Aplicación RecetasV3 - Sergio Peña Ruiz
+// La aplicación web trata sobre recetas de comida en la cual vamos a poder diferenciar claramente dos áreas
+// área pública donde tendrá acceso cualquier usuario donde podrá ver todas las recetas, o buscar una receta a través
+// del nombre. En la área  administración, donde podremos crear, editar y borrar recetas, y solo podrán entrar
+// usuarios pertenecientes a la base de datos.
 
 // Carga de librerías
 const express = require('express');

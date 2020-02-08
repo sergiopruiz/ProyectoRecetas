@@ -1,3 +1,4 @@
+//Archivo router para gestionar el inicio de sesión y finalizar sesión.
 const express = require('express');
 
 let router = express.Router();

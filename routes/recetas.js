@@ -1,11 +1,14 @@
+// Archivo router de recetas donde definimos cada una de las rutas, todas ellas estan protegidas con el sistema de autenticación 
+
 const express = require('express');
 const multer = require('multer');
 
 let router = express.Router();
 let Receta = require(__dirname + '/../models/receta.js');
-let upload = require('../app.js');
+// let upload = require('../app.js'); importación de multer
 let auth = require('../utils/auth');
 
+// Servicio multer para el guardado de imagenes
 let storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'public/uploads')
@@ -85,7 +88,7 @@ router.post('/recetas', auth, subirImg.single('imagen'), (req, res) => {
     });
 });
 
-//Servicio para renderiza la vista para editar una receta existente
+//Servicio para editar una receta por su id
 router.put('/recetas/:id', auth, subirImg.single('imagen'), (req, res) => {
     let arrayElementos = [];
 
@@ -133,7 +136,7 @@ router.put('/recetas/:id', auth, subirImg.single('imagen'), (req, res) => {
     });
 });
 
-// Servicio para renderizar la vista de eliminar una receta a traves de su id
+// Servicio para eliminar una receta a traves de su id
 router.delete('/recetas/:id', auth, (req, res) => {
     Receta.findByIdAndDelete(req.params.id).then(resultado => {
         if (resultado)

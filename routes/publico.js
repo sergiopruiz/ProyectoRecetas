@@ -1,9 +1,10 @@
+//Archivo router para la parte pública donde renderizara todas las vistas de recetas a las que tiene acceso.
 const express = require('express');
 
 let router = express.Router();
 let Receta = require(__dirname + '/../models/receta.js');
 
-// Servicio página de inicio pública
+// Servicio que rederiza la página de inicio pública
 router.get('/', (req, res) => {
     res.render('publico_index');
 });

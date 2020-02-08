@@ -1,3 +1,4 @@
+// Iniciamos el archivo y creara dos usuarios para guardarlos en al base de datos y poder iniciar sesión
 const mongoose = require('mongoose');
 const Usuario = require(__dirname + '/../models/usuario');
 var SHA256 = require("crypto-js/sha256");

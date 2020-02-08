@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// Define esquema y modelo
+// Define esquema y modelo de la receta.
 let elementoSchema = new mongoose.Schema([{
     ingrediente: {
         type: String,
